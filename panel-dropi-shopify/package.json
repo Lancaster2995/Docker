@@ -1,0 +1,16 @@
+{
+  "name": "panel-dropi-shopify",
+  "version": "1.0.0",
+  "description": "Panel en español para manejar una tienda Shopify conectada a Dropi, pensado para principiantes.",
+  "private": true,
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=18.17"
+  },
+  "license": "MIT"
+}

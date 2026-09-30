@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Panel Dropi Fácil</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 34'%3E%3Crect x='3' y='9' width='28' height='22' rx='3' fill='%23b98a4b'/%3E%3Ccircle cx='25' cy='8' r='7' fill='%234b3bc7'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&amp;family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&amp;family=IBM+Plex+Mono:wght@500&amp;display=swap">
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="riel">
+    <div class="marca">
+      <svg class="marca-caja" viewBox="0 0 34 34" aria-hidden="true">
+        <rect x="3" y="9" width="28" height="22" rx="3" fill="var(--kraft)"/>
+        <path d="M3 13h28" stroke="var(--superficie)" stroke-width="1.5" opacity="0.6"/>
+        <rect x="13" y="9" width="8" height="8" fill="var(--superficie)" opacity="0.45"/>
+        <circle cx="25" cy="8" r="7" fill="var(--acento)"/>
+        <path d="M21.8 8.2l2.2 2.2 4-4.3" fill="none" stroke="var(--acento-tinta)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div class="marca-nombre">Panel Dropi Fácil<small>Shopify + Dropi, sin enredos</small></div>
+    </div>
+    <nav class="nav" aria-label="Secciones">
+      <a href="#hoy" data-vista="hoy">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>
+        <span>Hoy</span>
+      </a>
+      <a href="#pedidos" data-vista="pedidos">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8l-9-5-9 5v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg>
+        <span>Pedidos</span>
+        <span class="burbuja" id="burbuja-pedidos" hidden></span>
+      </a>
+      <a href="#productos" data-vista="productos">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.6 13.4l-7.2 7.2a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="8" cy="8" r="1.5"/></svg>
+        <span>Productos</span>
+      </a>
+      <a href="#calculadora" data-vista="calculadora">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M8 6h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15v3M8 18h4"/></svg>
+        <span>Calcular</span>
+      </a>
+      <a href="#aprende" data-vista="aprende">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 5h7a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H2zM22 5h-7a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h8z"/></svg>
+        <span>Aprende</span>
+      </a>
+      <a href="#ajustes" data-vista="ajustes">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></svg>
+        <span>Ajustes</span>
+      </a>
+    </nav>
+    <p class="riel-pie" id="riel-pie">Cargando…</p>
+  </aside>
+  <main class="principal" id="principal">
+    <div class="contenido" id="vista">
+      <p class="cargando">Cargando tu tienda…</p>
+    </div>
+  </main>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

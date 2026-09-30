@@ -1,0 +1,10 @@
+# Uso: docker compose up -d   y luego abre http://localhost:3000
+services:
+  panel:
+    build: .
+    restart: unless-stopped
+    # Solo accesible desde este computador. Tus claves de Shopify quedan en ./datos.
+    ports:
+      - "127.0.0.1:3000:3000"
+    volumes:
+      - ./datos:/app/datos
