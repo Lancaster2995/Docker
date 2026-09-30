@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-# Inicia el panel y lo abre en el navegador.
+# Inicia el panel y lo abre en el navegador cuando está listo.
 cd "$(dirname "$0")" || exit 1
 if ! command -v node >/dev/null 2>&1; then
   echo ""
@@ -7,6 +7,4 @@ if ! command -v node >/dev/null 2>&1; then
   echo ""
   exit 1
 fi
-URL="http://localhost:${PORT:-3000}"
-( sleep 1; if command -v open >/dev/null 2>&1; then open "$URL"; elif command -v xdg-open >/dev/null 2>&1; then xdg-open "$URL"; fi ) >/dev/null 2>&1 &
-exec node server.js
+ABRIR_NAVEGADOR=1 exec node server.js

@@ -1,3 +1,4 @@
+import { exec } from 'node:child_process';
 import { createServer } from 'node:http';
 import { readFile, stat } from 'node:fs/promises';
 import path from 'node:path';
@@ -131,19 +132,40 @@ export function crearApp({ carpetaDatos, hostsPermitidos = [], fabricaShopify } 
   });
 }
 
+// Abre el panel en el navegador de la persona (lo piden los archivos de inicio con ABRIR_NAVEGADOR=1).
+function abrirNavegador(url) {
+  const comando = process.platform === 'win32' ? `start "" "${url}"` : process.platform === 'darwin' ? `open "${url}"` : `xdg-open "${url}"`;
+  exec(comando, () => {});
+}
+
 const esPrincipal = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
 if (esPrincipal) {
   const puerto = Number(process.env.PORT) || 3000;
   const host = process.env.HOST || '127.0.0.1';
+  const url = `http://localhost:${puerto}`;
+  const abrir = process.env.ABRIR_NAVEGADOR === '1';
   const app = crearApp({
     carpetaDatos: process.env.DATA_DIR || path.join(RAIZ, 'datos'),
     hostsPermitidos: (process.env.ALLOWED_HOSTS || '').split(',').map((h) => h.trim()).filter(Boolean),
   });
+  app.on('error', (error) => {
+    if (error.code === 'EADDRINUSE') {
+      console.log('');
+      console.log(`  El puerto ${puerto} ya está en uso. Quizá el panel ya está abierto en otra ventana.`);
+      console.log(`  Prueba abrir ${url} en tu navegador, o cierra la otra ventana y vuelve a intentarlo.`);
+      console.log('');
+      if (abrir) abrirNavegador(url);
+      process.exitCode = 1;
+      return;
+    }
+    throw error;
+  });
   app.listen(puerto, host, () => {
     console.log('');
     console.log('  Panel Dropi Fácil está listo.');
-    console.log(`  Ábrelo en tu navegador: http://localhost:${puerto}`);
+    console.log(`  Ábrelo en tu navegador: ${url}`);
     console.log('  Para apagarlo, cierra esta ventana o presiona Ctrl + C.');
     console.log('');
+    if (abrir) abrirNavegador(url);
   });
 }

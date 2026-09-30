@@ -10,8 +10,6 @@ if errorlevel 1 (
   pause
   exit /b 1
 )
-echo.
-echo  Abriendo el panel en tu navegador...
-start "" http://localhost:3000
+set ABRIR_NAVEGADOR=1
 node server.js
 pause
