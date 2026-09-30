@@ -6,627 +6,287 @@
 <link rel="stylesheet" href="fonts/local.css">
 <style>
   :root {
-    --green: #3dff8f;
-    --green-2: #19c46a;
-    --green-deep: #06331b;
-    --ink: #020805;
-    --silver-hi: #f4f7f8;
-    --silver: #aab3b9;
-    --text: #e9f5ee;
-    --muted: #93b8a3;
+    --bg-1: #16241d;
+    --bg-2: #0b120e;
+    --bg-3: #060907;
+    --accent: #6fd69c;
+    --accent-ink: #1a7a47;
+    --paper-1: #f7f9f8;
+    --paper-2: #e4eae7;
+    --ink: #111a15;
+    --ink-soft: #5d6b64;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { background: var(--ink); }
+  html, body { background: var(--bg-3); }
   body {
     width: var(--w); height: var(--h);
     position: relative; overflow: hidden;
-    color: var(--text);
-    font-family: 'Oswald', sans-serif;
-  }
-  #bg { position: absolute; inset: 0; width: 100%; height: 100%; }
-
-  /* ---------- frame ---------- */
-  .frame {
-    position: absolute; inset: 26px;
-    border: 2px solid rgba(61, 255, 143, .28);
-    border-radius: 18px;
-    pointer-events: none;
-  }
-  .frame::before {
-    content: ""; position: absolute; inset: 8px;
-    border: 1px solid rgba(200, 215, 220, .14);
-    border-radius: 12px;
-  }
-  .corner { position: absolute; width: 96px; height: 96px; }
-  .corner.tl { top: -6px; left: -6px; }
-  .corner.tr { top: -6px; right: -6px; transform: scaleX(-1); }
-  .corner.bl { bottom: -6px; left: -6px; transform: scaleY(-1); }
-  .corner.br { bottom: -6px; right: -6px; transform: scale(-1, -1); }
-
-  .content { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; }
-
-  /* ---------- ribbon ---------- */
-  .ribbon {
-    position: relative;
-    font-family: 'Anton', sans-serif;
-    text-transform: uppercase;
-    color: #03150b;
-    background: linear-gradient(180deg, #b6ffd3 0%, var(--green) 38%, var(--green-2) 100%);
-    clip-path: polygon(4% 0, 96% 0, 100% 50%, 96% 100%, 4% 100%, 0 50%);
-    filter: drop-shadow(0 0 18px rgba(61,255,143,.55));
-    letter-spacing: .04em;
-    line-height: 1;
-    white-space: nowrap;
-  }
-  .ribbon-wrap { position: relative; filter: drop-shadow(0 10px 24px rgba(0,0,0,.6)); }
-  .sub-kicker {
-    font-family: 'Cinzel', serif; font-weight: 700;
-    color: var(--muted); letter-spacing: .32em; text-transform: uppercase;
-    display: flex; align-items: center; gap: 18px; white-space: nowrap;
-  }
-  .sub-kicker::before, .sub-kicker::after {
-    content: ""; height: 2px; width: 90px;
-    background: linear-gradient(90deg, transparent, rgba(61,255,143,.8));
-  }
-  .sub-kicker::after { transform: scaleX(-1); }
-
-  /* ---------- hero ---------- */
-  .hero { position: relative; display: grid; place-items: center; }
-  .hero > svg { position: absolute; }
-  .rune { animation: none; opacity: .75; }
-
-  /* ---------- title ---------- */
-  .title { text-align: center; line-height: .9; position: relative; }
-  .t-avengers {
-    font-family: 'Anton', sans-serif; text-transform: uppercase;
-    letter-spacing: .07em;
-    background: linear-gradient(180deg, #ffffff 0%, #dfe5e8 30%, #8d979e 52%, #eef2f4 64%, #6b747a 100%);
-    -webkit-background-clip: text; background-clip: text; color: transparent;
-    filter: drop-shadow(0 4px 0 #1a1f22) drop-shadow(0 12px 22px rgba(0,0,0,.8));
-    display: block;
-  }
-  .t-doomsday {
-    font-family: 'Cinzel', serif; font-weight: 900; text-transform: uppercase;
-    letter-spacing: .1em;
-    background: linear-gradient(180deg, #eafff2 0%, #7dffb4 30%, var(--green-2) 62%, #0b6b37 100%);
-    -webkit-background-clip: text; background-clip: text; color: transparent;
-    filter: drop-shadow(0 0 14px rgba(61,255,143,.75)) drop-shadow(0 0 40px rgba(61,255,143,.35)) drop-shadow(0 6px 10px rgba(0,0,0,.9));
-    display: block;
-  }
-
-  /* ---------- ticket card ---------- */
-  .ticket {
-    position: relative;
+    font-family: 'Montserrat', sans-serif; color: #fff;
     background:
-      linear-gradient(180deg, rgba(10, 40, 24, .82), rgba(3, 14, 8, .9));
-    border: 2px solid rgba(61, 255, 143, .5);
-    border-radius: 28px;
-    box-shadow: 0 0 0 1px rgba(0,0,0,.6), 0 0 40px rgba(61,255,143,.18), inset 0 1px 0 rgba(255,255,255,.08), 0 30px 60px rgba(0,0,0,.6);
-    backdrop-filter: blur(4px);
+      radial-gradient(ellipse 70% 45% at 50% 0%, var(--bg-1) 0%, transparent 100%),
+      radial-gradient(ellipse 90% 60% at 50% 70%, #0f1c15 0%, transparent 100%),
+      linear-gradient(180deg, var(--bg-2), var(--bg-3));
   }
-  .ticket::before { /* metal top bar */
-    content: ""; position: absolute; left: 40px; right: 40px; top: -2px; height: 4px;
-    background: linear-gradient(90deg, transparent, #dfe5e8, #7d878d, #dfe5e8, transparent);
-    border-radius: 4px;
+  #dust { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+  /* soft projector beam */
+  .beam {
+    position: absolute; left: 50%; top: -40px; transform: translateX(-50%);
+    background: linear-gradient(180deg, rgba(190, 240, 210, .16), rgba(190, 240, 210, 0) 85%);
+    clip-path: polygon(46% 0, 54% 0, 100% 100%, 0 100%);
+    filter: blur(28px);
   }
-  .info-grid { display: grid; }
-  .item { display: flex; align-items: center; }
-  .icon {
-    flex: none; display: grid; place-items: center; border-radius: 50%;
-    background: radial-gradient(circle at 35% 30%, #1f7d49, #06331b 70%);
-    border: 2px solid rgba(61,255,143,.65);
-    box-shadow: 0 0 18px rgba(61,255,143,.35), inset 0 2px 0 rgba(255,255,255,.15);
+  .grain {
+    position: absolute; inset: 0; opacity: .07; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
   }
-  .icon svg { stroke: var(--green); fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+
+  .content { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+
+  /* eyebrow */
+  .eyebrow {
+    display: flex; align-items: center; white-space: nowrap;
+    font-weight: 600; text-transform: uppercase; color: var(--accent);
+  }
+  .eyebrow::before, .eyebrow::after {
+    content: ""; height: 1.5px;
+    background: linear-gradient(90deg, transparent, rgba(111, 214, 156, .7));
+  }
+  .eyebrow::after { transform: scaleX(-1); }
+
+  /* title */
+  .title { text-align: center; line-height: .92; }
+  .t1 {
+    display: block; font-family: 'Anton', sans-serif; text-transform: uppercase;
+    background: linear-gradient(180deg, #ffffff 0%, #e3e8eb 45%, #9aa4aa 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    filter: drop-shadow(0 8px 20px rgba(0, 0, 0, .55));
+  }
+  .t2 {
+    display: block; font-family: 'Cinzel', serif; font-weight: 700; text-transform: uppercase;
+    background: linear-gradient(180deg, #d9f5e5 0%, #8fdcb0 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+
+  /* ticket */
+  .ticket { display: flex; filter: drop-shadow(0 30px 50px rgba(0, 0, 0, .55)) drop-shadow(0 0 60px rgba(111, 214, 156, .10)); }
+  .part { position: relative; color: var(--ink); background: linear-gradient(160deg, var(--paper-1), var(--paper-2)); }
   .label {
-    font-family: 'Cinzel', serif; font-weight: 700; color: var(--muted);
-    letter-spacing: .22em; text-transform: uppercase; line-height: 1.1;
+    font-weight: 600; text-transform: uppercase; color: var(--ink-soft); letter-spacing: .18em; line-height: 1.2;
   }
-  .value { font-weight: 700; text-transform: uppercase; color: #fff; line-height: 1.02; letter-spacing: .01em; }
-  .value .hl { color: var(--green); }
-  .small { font-weight: 400; color: var(--text); opacity: .85; line-height: 1.15; }
+  .value { font-weight: 800; color: var(--ink); line-height: 1.08; letter-spacing: -.01em; }
+  .sub { font-weight: 500; color: var(--ink-soft); line-height: 1.25; }
+  .green { color: var(--accent-ink); }
 
-  .perf {
-    position: relative; height: 2px; margin: 0 -2px;
-    background-image: linear-gradient(90deg, rgba(61,255,143,.55) 55%, transparent 0);
-    background-size: 22px 2px;
+  .field { display: flex; align-items: flex-start; }
+  .ico {
+    flex: none; display: grid; place-items: center; border-radius: 14px;
+    background: rgba(26, 122, 71, .09);
   }
-  .perf::before, .perf::after {
-    content: ""; position: absolute; top: 50%; width: 44px; height: 44px; border-radius: 50%;
-    background: #020a06; transform: translateY(-50%);
-    border: 2px solid rgba(61, 255, 143, .5);
-  }
-  .perf::before { left: -24px; clip-path: inset(0 0 0 50%); }
-  .perf::after { right: -24px; clip-path: inset(0 50% 0 0); }
+  .ico svg { fill: none; stroke: var(--accent-ink); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
-  /* ---------- seats ---------- */
-  .seats-head { display: flex; align-items: center; justify-content: space-between; }
-  .screen { position: relative; margin: 0 auto; }
-  .screen svg { display: block; width: 100%; }
-  .screen span {
-    position: absolute; left: 0; right: 0; bottom: -2px; text-align: center;
-    font-family: 'Cinzel', serif; font-weight: 700; color: var(--muted); letter-spacing: .5em;
-  }
-  .row { display: flex; justify-content: center; align-items: flex-end; }
+  .seats { display: flex; }
   .seat {
-    position: relative; display: grid; place-items: center;
-    border-radius: 14px 14px 8px 8px;
-    border: 2px solid rgba(147, 184, 163, .28);
-    background: rgba(255,255,255,.03);
-    color: rgba(147, 184, 163, .45);
-    font-weight: 600;
+    display: grid; place-items: center; font-weight: 700;
+    border-radius: 10px 10px 5px 5px;
+    border: 1.5px solid rgba(17, 26, 21, .18); color: rgba(17, 26, 21, .35);
   }
-  .seat::after { /* armrest base */
-    content: ""; position: absolute; left: -5px; right: -5px; bottom: -9px; height: 9px;
-    border-radius: 0 0 6px 6px; border: 2px solid rgba(147, 184, 163, .22); border-top: none;
-  }
-  .seat.on {
-    background: linear-gradient(180deg, #8dffbf 0%, var(--green) 45%, var(--green-2) 100%);
-    border-color: #c9ffe0; color: #03150b; font-weight: 700;
-    box-shadow: 0 0 22px rgba(61,255,143,.7), inset 0 2px 0 rgba(255,255,255,.6);
-  }
-  .seat.on::after { border-color: rgba(61,255,143,.9); }
-  .row-label {
-    font-family: 'Anton', sans-serif; color: var(--muted); display: grid; place-items: center;
-  }
-  .seats-note { text-align: center; text-transform: uppercase; letter-spacing: .06em; }
-  .seats-note b { color: var(--green); font-weight: 700; }
+  .seat.on { background: var(--accent-ink); border-color: var(--accent-ink); color: #fff; }
 
-  /* ---------- CTA ---------- */
-  .cta {
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Anton', sans-serif; text-transform: uppercase; letter-spacing: .05em;
-    color: #03150b; white-space: nowrap;
-    background: linear-gradient(180deg, #d8ffe8 0%, var(--green) 40%, var(--green-2) 100%);
-    border-radius: 999px;
-    box-shadow: 0 0 0 3px rgba(3,21,11,.9), 0 0 0 5px rgba(61,255,143,.6), 0 0 40px rgba(61,255,143,.5), 0 18px 30px rgba(0,0,0,.6);
-  }
-  .cta svg { fill: none; stroke: #03150b; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+  .barcode { display: flex; align-items: stretch; }
+  .barcode i { display: block; background: var(--ink); }
+
+  .foot { display: flex; align-items: center; color: #cfd8d3; font-weight: 500; white-space: nowrap; }
+  .foot b { color: #fff; font-weight: 700; }
+  .foot svg { fill: none; stroke: var(--accent); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
   /* =================== STORY 1080x1920 =================== */
   body.story { --w: 1080px; --h: 1920px; }
-  .story .content { padding: 78px 70px 0; }
-  .story .ribbon { font-size: 74px; padding: 20px 88px 18px; }
-  .story .sub-kicker { font-size: 26px; margin-top: 22px; }
-  .story .hero { width: 940px; height: 500px; margin-top: 6px; }
-  .story .rune { width: 540px; height: 540px; top: 4px; }
-  .story .mask { height: 446px; top: 38px; }
-  .story .title { margin-top: -14px; }
-  .story .t-avengers { font-size: 158px; }
-  .story .t-doomsday { font-size: 114px; margin-top: 2px; }
-  .story .ticket { width: 940px; margin-top: 30px; }
-  .story .info-grid { grid-template-columns: 1fr 1fr; gap: 24px 28px; padding: 34px 44px 30px; }
-  .story .item.wide { grid-column: 1 / -1; }
-  .story .item { gap: 22px; }
-  .story .icon { width: 84px; height: 84px; }
-  .story .icon svg { width: 42px; height: 42px; }
-  .story .label { font-size: 21px; margin-bottom: 6px; }
-  .story .value { font-size: 50px; }
-  .story .small { font-size: 27px; margin-top: 4px; }
-  .story .seats { padding: 26px 44px 32px; }
-  .story .seats-head .label { font-size: 21px; }
-  .story .screen { width: 760px; margin-top: 16px; }
-  .story .screen span { font-size: 17px; }
-  .story .row { gap: 12px; margin-top: 22px; }
-  .story .seat { width: 64px; height: 62px; font-size: 25px; }
-  .story .row-label { font-size: 34px; width: 36px; height: 62px; }
-  .story .seats-note { font-size: 29px; margin-top: 28px; }
-  .story .cta { margin-top: 40px; font-size: 48px; padding: 22px 58px; gap: 20px; }
-  .story .cta svg { width: 52px; height: 52px; }
+  .story .beam { width: 1400px; height: 1250px; }
+  .story .content { padding: 0 90px; }
+  .story .eyebrow { font-size: 40px; letter-spacing: .3em; gap: 26px; }
+  .story .eyebrow::before, .story .eyebrow::after { width: 90px; }
+  .story .title { margin-top: 44px; }
+  .story .t1 { font-size: 190px; letter-spacing: .05em; }
+  .story .t2 { font-size: 84px; letter-spacing: .38em; margin-top: 10px; padding-left: .38em; }
+
+  .story .ticket { flex-direction: column; width: 900px; margin-top: 76px; }
+  .story .main {
+    padding: 56px 58px 50px; border-radius: 30px 30px 0 0;
+    -webkit-mask:
+      radial-gradient(circle 28px at 0 100%, #0000 97%, #000) 0 0 / 51% 100% no-repeat,
+      radial-gradient(circle 28px at 100% 100%, #0000 97%, #000) 100% 0 / 51% 100% no-repeat;
+  }
+  .story .main::after {
+    content: ""; position: absolute; left: 44px; right: 44px; bottom: 0; height: 2px;
+    background-image: linear-gradient(90deg, rgba(17, 26, 21, .28) 55%, transparent 0);
+    background-size: 20px 2px;
+  }
+  .story .stub {
+    padding: 48px 58px 50px; border-radius: 0 0 30px 30px;
+    -webkit-mask:
+      radial-gradient(circle 28px at 0 0, #0000 97%, #000) 0 0 / 51% 100% no-repeat,
+      radial-gradient(circle 28px at 100% 0, #0000 97%, #000) 100% 0 / 51% 100% no-repeat;
+  }
+  .story .grid { display: grid; grid-template-columns: 1fr; gap: 38px; }
+  .story .wide { grid-column: 1 / -1; }
+  .story .field { gap: 22px; }
+  .story .ico { width: 72px; height: 72px; }
+  .story .ico svg { width: 38px; height: 38px; }
+  .story .label { font-size: 20px; margin-bottom: 8px; }
+  .story .value { font-size: 48px; }
+  .story .sub { font-size: 26px; margin-top: 6px; }
+  .story .seats { gap: 10px; margin-top: 30px; justify-content: space-between; }
+  .story .seat { width: 72px; height: 64px; font-size: 22px; }
+  .story .stub-bottom { display: flex; align-items: flex-end; justify-content: space-between; margin-top: 38px; }
+  .story .qty .value { font-size: 44px; }
+  .story .barcode { height: 86px; }
+  .story .foot { margin-top: 70px; font-size: 34px; gap: 18px; }
+  .story .foot svg { width: 44px; height: 44px; }
 
   /* =================== SQUARE 1080x1080 =================== */
   body.square { --w: 1080px; --h: 1080px; }
-  .square .content { padding: 64px 62px 72px; justify-content: space-between; }
-  .square .ribbon { font-size: 60px; padding: 16px 72px 14px; }
-  .square .main { display: grid; grid-template-columns: 410px 1fr; gap: 10px; width: 100%; align-items: center; }
-  .square .hero { width: 410px; height: 470px; }
-  .square .rune { width: 440px; height: 440px; top: 12px; }
-  .square .mask { height: 420px; top: 30px; }
-  .square .right { display: flex; flex-direction: column; align-items: stretch; }
-  .square .title { text-align: left; }
-  .square .t-avengers { font-size: 116px; letter-spacing: .05em; }
-  .square .t-doomsday { font-size: 77px; letter-spacing: .08em; }
-  .square .ticket { width: 100%; margin-top: 22px; }
-  .square .info-grid { grid-template-columns: 1fr 1fr; gap: 22px 16px; padding: 26px 26px 24px; }
-  .square .item.wide { grid-column: 1 / -1; }
-  .square .item { gap: 14px; }
-  .square .icon { width: 58px; height: 58px; }
-  .square .icon svg { width: 30px; height: 30px; }
-  .square .label { font-size: 15px; margin-bottom: 3px; }
+  .square .beam { width: 1200px; height: 800px; }
+  .square .content { padding: 0 64px; }
+  .square .eyebrow { font-size: 30px; letter-spacing: .3em; gap: 22px; }
+  .square .eyebrow::before, .square .eyebrow::after { width: 70px; }
+  .square .title { margin-top: 26px; }
+  .square .t1 { font-size: 132px; letter-spacing: .05em; }
+  .square .t2 { font-size: 58px; letter-spacing: .38em; margin-top: 6px; padding-left: .38em; }
+
+  .square .ticket { flex-direction: row; width: 952px; margin-top: 46px; }
+  .square .main {
+    flex: 1; padding: 40px 40px 38px; border-radius: 26px 0 0 26px;
+    -webkit-mask:
+      radial-gradient(circle 24px at 100% 0, #0000 97%, #000) 0 0 / 100% 51% no-repeat,
+      radial-gradient(circle 24px at 100% 100%, #0000 97%, #000) 0 100% / 100% 51% no-repeat;
+  }
+  .square .main::after {
+    content: ""; position: absolute; top: 36px; bottom: 36px; right: 0; width: 2px;
+    background-image: linear-gradient(180deg, rgba(17, 26, 21, .28) 55%, transparent 0);
+    background-size: 2px 18px;
+  }
+  .square .stub {
+    width: 330px; padding: 40px 34px 34px; border-radius: 0 26px 26px 0;
+    display: flex; flex-direction: column;
+    -webkit-mask:
+      radial-gradient(circle 24px at 0 0, #0000 97%, #000) 0 0 / 100% 51% no-repeat,
+      radial-gradient(circle 24px at 0 100%, #0000 97%, #000) 0 100% / 100% 51% no-repeat;
+  }
+  .square .grid { display: grid; grid-template-columns: 1fr; gap: 22px; }
+  .square .wide { grid-column: 1 / -1; }
+  .square .field { gap: 16px; }
+  .square .ico { width: 56px; height: 56px; border-radius: 12px; }
+  .square .ico svg { width: 30px; height: 30px; }
+  .square .label { font-size: 15px; margin-bottom: 6px; }
   .square .value { font-size: 34px; }
-  .square .small { font-size: 20px; margin-top: 2px; }
-  .square .seats-block { width: 100%; margin-top: 0; padding: 22px 30px 28px; display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 26px; }
-  .square .seats-block .label { font-size: 16px; }
-  .square .seats-left .value { font-size: 40px; margin-top: 4px; }
-  .square .seats-left .small { font-size: 19px; }
-  .square .screen { width: 100%; }
-  .square .screen span { font-size: 13px; }
-  .square .row { gap: 9px; margin-top: 14px; }
-  .square .seat { width: 46px; height: 46px; font-size: 18px; border-radius: 11px 11px 6px 6px; }
-  .square .seat::after { bottom: -7px; height: 7px; }
-  .square .row-label { font-size: 26px; width: 24px; height: 46px; }
-  .square .cta { margin-top: 0; font-size: 40px; padding: 18px 48px; gap: 14px; }
-  .square .cta svg { width: 40px; height: 40px; }
+  .square .sub { font-size: 19px; margin-top: 4px; }
+  .square .stub .value { font-size: 40px; }
+  .square .seats { gap: 6px; margin-top: 22px; }
+  .square .seat { width: 46px; height: 42px; font-size: 15px; border-radius: 8px 8px 4px 4px; }
+  .square .stub-bottom { margin-top: auto; display: flex; align-items: flex-end; justify-content: space-between; }
+  .square .qty .value { font-size: 30px; }
+  .square .barcode { height: 58px; }
+  .square .foot { margin-top: 46px; font-size: 28px; gap: 14px; }
+  .square .foot svg { width: 36px; height: 36px; }
 </style>
 </head>
 <body>
-<canvas id="bg"></canvas>
-
-<div class="frame">
-  <svg class="corner tl" viewBox="0 0 96 96" fill="none">
-    <path d="M6 70 V14 a8 8 0 0 1 8-8 H70" stroke="#3dff8f" stroke-width="4"/>
-    <path d="M18 56 V22 a4 4 0 0 1 4-4 H56" stroke="#cfd6da" stroke-width="2" opacity=".7"/>
-    <rect x="1" y="1" width="12" height="12" transform="rotate(45 7 7) translate(6 -2)" fill="#3dff8f"/>
-    <circle cx="70" cy="6" r="4" fill="#cfd6da"/><circle cx="6" cy="70" r="4" fill="#cfd6da"/>
-  </svg>
-  <svg class="corner tr" viewBox="0 0 96 96" fill="none">
-    <path d="M6 70 V14 a8 8 0 0 1 8-8 H70" stroke="#3dff8f" stroke-width="4"/>
-    <path d="M18 56 V22 a4 4 0 0 1 4-4 H56" stroke="#cfd6da" stroke-width="2" opacity=".7"/>
-    <circle cx="70" cy="6" r="4" fill="#cfd6da"/><circle cx="6" cy="70" r="4" fill="#cfd6da"/>
-  </svg>
-  <svg class="corner bl" viewBox="0 0 96 96" fill="none">
-    <path d="M6 70 V14 a8 8 0 0 1 8-8 H70" stroke="#3dff8f" stroke-width="4"/>
-    <path d="M18 56 V22 a4 4 0 0 1 4-4 H56" stroke="#cfd6da" stroke-width="2" opacity=".7"/>
-    <circle cx="70" cy="6" r="4" fill="#cfd6da"/><circle cx="6" cy="70" r="4" fill="#cfd6da"/>
-  </svg>
-  <svg class="corner br" viewBox="0 0 96 96" fill="none">
-    <path d="M6 70 V14 a8 8 0 0 1 8-8 H70" stroke="#3dff8f" stroke-width="4"/>
-    <path d="M18 56 V22 a4 4 0 0 1 4-4 H56" stroke="#cfd6da" stroke-width="2" opacity=".7"/>
-    <circle cx="70" cy="6" r="4" fill="#cfd6da"/><circle cx="6" cy="70" r="4" fill="#cfd6da"/>
-  </svg>
-</div>
-
+<div class="beam"></div>
+<canvas id="dust"></canvas>
+<div class="grain"></div>
 <div class="content" id="content"></div>
 
-<!-- ============ reusable pieces ============ -->
-<template id="tpl-hero">
-  <div class="hero" id="hero">
-    <svg class="rune" viewBox="0 0 700 700" id="rune"></svg>
-    <svg class="mask" viewBox="0 0 400 460" id="mask">
-      <defs>
-        <linearGradient id="metal" x1="0" x2="1" y1="0" y2="0">
-          <stop offset="0" stop-color="#4a5359"/>
-          <stop offset=".16" stop-color="#bfc7cc"/>
-          <stop offset=".34" stop-color="#f6f9fa"/>
-          <stop offset=".5" stop-color="#9aa4ab"/>
-          <stop offset=".66" stop-color="#eef2f4"/>
-          <stop offset=".84" stop-color="#aeb7bd"/>
-          <stop offset="1" stop-color="#3f474d"/>
-        </linearGradient>
-        <linearGradient id="metalShade" x1="0" x2="0" y1="0" y2="1">
-          <stop offset="0" stop-color="#fff" stop-opacity=".28"/>
-          <stop offset=".45" stop-color="#fff" stop-opacity="0"/>
-          <stop offset="1" stop-color="#000" stop-opacity=".55"/>
-        </linearGradient>
-        <linearGradient id="metalDark" x1="0" x2="1">
-          <stop offset="0" stop-color="#2d3337"/>
-          <stop offset=".3" stop-color="#8b959b"/>
-          <stop offset=".5" stop-color="#5d666c"/>
-          <stop offset=".7" stop-color="#8b959b"/>
-          <stop offset="1" stop-color="#2d3337"/>
-        </linearGradient>
-        <radialGradient id="hood" cx=".5" cy=".25" r=".85">
-          <stop offset="0" stop-color="#1f8a4c"/>
-          <stop offset=".45" stop-color="#0d4a27"/>
-          <stop offset="1" stop-color="#021309"/>
-        </radialGradient>
-        <radialGradient id="hoodInner" cx=".5" cy=".45" r=".6">
-          <stop offset=".55" stop-color="#010402"/>
-          <stop offset="1" stop-color="#062414"/>
-        </radialGradient>
-        <radialGradient id="rivet" cx=".35" cy=".35" r=".7">
-          <stop offset="0" stop-color="#ffffff"/>
-          <stop offset=".5" stop-color="#8b959b"/>
-          <stop offset="1" stop-color="#23292c"/>
-        </radialGradient>
-        <filter id="eyeGlow" x="-100%" y="-200%" width="300%" height="500%">
-          <feGaussianBlur stdDeviation="7" result="b"/>
-          <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
-        <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="10"/></filter>
-      </defs>
-
-      <!-- hood -->
-      <path d="M200 6 C95 6 28 104 26 255 C25 330 16 400 2 460 L398 460 C384 400 375 330 374 255 C372 104 305 6 200 6 Z" fill="url(#hood)"/>
-      <path d="M200 6 C95 6 28 104 26 255 C25 330 16 400 2 460" stroke="#46e38a" stroke-opacity=".35" stroke-width="2" fill="none"/>
-      <path d="M200 6 C305 6 372 104 374 255 C375 330 384 400 398 460" stroke="#46e38a" stroke-opacity=".35" stroke-width="2" fill="none"/>
-      <path d="M60 160 C48 250 46 350 30 450 M340 160 C352 250 354 350 370 450 M112 40 C80 90 64 150 58 220 M288 40 C320 90 336 150 342 220" stroke="#000" stroke-opacity=".35" stroke-width="5" fill="none" stroke-linecap="round"/>
-      <path d="M200 50 C122 50 76 128 74 240 C73 310 78 380 90 460 L310 460 C322 380 327 310 326 240 C324 128 278 50 200 50 Z" fill="url(#hoodInner)"/>
-
-      <!-- gorget / collar -->
-      <path d="M128 392 L272 392 L304 460 L96 460 Z" fill="url(#metalDark)"/>
-      <path d="M118 414 L282 414 M108 436 L292 436" stroke="#1a1f22" stroke-width="3"/>
-      <path d="M118 416 L282 416 M108 438 L292 438" stroke="#cfd6da" stroke-opacity=".35" stroke-width="1.5"/>
-
-      <!-- face plate -->
-      <path id="face" d="M200 76 C150 76 116 110 112 168 L110 250 C110 300 118 345 140 375 C158 398 180 410 200 412 C220 410 242 398 260 375 C282 345 290 300 290 250 L288 168 C284 110 250 76 200 76 Z" fill="url(#metal)" stroke="#1d2226" stroke-width="3"/>
-      <path d="M200 76 C150 76 116 110 112 168 L110 250 C110 300 118 345 140 375 C158 398 180 410 200 412 C220 410 242 398 260 375 C282 345 290 300 290 250 L288 168 C284 110 250 76 200 76 Z" fill="url(#metalShade)"/>
-
-      <!-- forehead seam + panels -->
-      <path d="M200 78 L200 192" stroke="#1d2226" stroke-opacity=".55" stroke-width="2.5"/>
-      <path d="M202.5 80 L202.5 190" stroke="#fff" stroke-opacity=".5" stroke-width="1.2"/>
-      <path d="M140 108 C160 132 170 160 172 186 M260 108 C240 132 230 160 228 186" stroke="#1d2226" stroke-opacity=".35" stroke-width="2" fill="none"/>
-
-      <!-- brow ridge -->
-      <path d="M114 186 C150 176 180 184 200 197 C220 184 250 176 286 186 L286 202 C252 194 222 200 200 214 C178 200 148 194 114 202 Z" fill="url(#metalDark)" stroke="#161a1d" stroke-width="2"/>
-      <path d="M116 188 C150 179 180 187 200 199 C220 187 250 179 284 188" stroke="#fff" stroke-opacity=".55" stroke-width="1.5" fill="none"/>
-
-      <!-- eyes -->
-      <path d="M130 214 C150 208 172 213 190 225 L185 238 C168 233 148 233 134 229 Z" fill="#010604" stroke="#161a1d" stroke-width="2"/>
-      <path d="M270 214 C250 208 228 213 210 225 L215 238 C232 233 252 233 266 229 Z" fill="#010604" stroke="#161a1d" stroke-width="2"/>
-      <g filter="url(#eyeGlow)">
-        <path d="M140 219 C156 216 172 219 182 227 L180 231 C166 229 152 229 142 226 Z" fill="#6bffae"/>
-        <path d="M260 219 C244 216 228 219 218 227 L220 231 C234 229 248 229 258 226 Z" fill="#6bffae"/>
-      </g>
-
-      <!-- nose -->
-      <path d="M200 214 L186 290 L200 304 L214 290 Z" fill="url(#metalDark)" opacity=".55"/>
-      <path d="M200 214 L186 290 L200 304" stroke="#fff" stroke-opacity=".6" stroke-width="1.5" fill="none"/>
-      <path d="M200 214 L214 290 L200 304" stroke="#161a1d" stroke-opacity=".6" stroke-width="2" fill="none"/>
-      <path d="M190 296 L184 306 M210 296 L216 306" stroke="#161a1d" stroke-width="3" stroke-linecap="round"/>
-
-      <!-- cheek plates -->
-      <path d="M124 240 C130 292 146 330 170 354" stroke="#161a1d" stroke-opacity=".5" stroke-width="3" fill="none"/>
-      <path d="M127 240 C133 290 149 328 172 351" stroke="#fff" stroke-opacity=".4" stroke-width="1.2" fill="none"/>
-      <path d="M276 240 C270 292 254 330 230 354" stroke="#161a1d" stroke-opacity=".5" stroke-width="3" fill="none"/>
-      <path d="M273 240 C267 290 251 328 228 351" stroke="#fff" stroke-opacity=".3" stroke-width="1.2" fill="none"/>
-
-      <!-- mouth grille -->
-      <rect x="158" y="322" width="84" height="30" rx="7" fill="#050807" stroke="#161a1d" stroke-width="2"/>
-      <g fill="url(#metal)">
-        <rect x="167" y="323" width="5" height="28"/><rect x="178" y="323" width="5" height="28"/>
-        <rect x="189" y="323" width="5" height="28"/><rect x="200" y="323" width="5" height="28"/>
-        <rect x="211" y="323" width="5" height="28"/><rect x="222" y="323" width="5" height="28"/>
-        <rect x="233" y="323" width="5" height="28"/>
-      </g>
-      <path d="M172 374 C186 386 214 386 228 374" stroke="#161a1d" stroke-opacity=".5" stroke-width="2.5" fill="none"/>
-
-      <!-- rivets -->
-      <g fill="url(#rivet)">
-        <circle cx="124" cy="172" r="5"/><circle cx="276" cy="172" r="5"/>
-        <circle cx="121" cy="262" r="5"/><circle cx="279" cy="262" r="5"/>
-        <circle cx="150" cy="362" r="4.5"/><circle cx="250" cy="362" r="4.5"/>
-        <circle cx="200" cy="98" r="4.5"/>
-      </g>
-
-      <!-- specular -->
-      <ellipse cx="158" cy="138" rx="18" ry="40" fill="#fff" opacity=".35" filter="url(#soft)"/>
-      <ellipse cx="250" cy="140" rx="10" ry="28" fill="#fff" opacity=".2" filter="url(#soft)"/>
-    </svg>
-  </div>
-</template>
-
 <template id="tpl-icons">
-  <svg data-i="cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/><path d="M8 14h2M14 14h2M8 17.5h2"/></svg>
+  <svg data-i="cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>
   <svg data-i="clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
   <svg data-i="pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.6"/></svg>
   <svg data-i="seat" viewBox="0 0 24 24"><path d="M6 12V6a3 3 0 0 1 3-3h6a3 3 0 0 1 3 3v6"/><path d="M4 11h2v5h12v-5h2v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M7 19v2M17 19v2"/></svg>
-  <svg data-i="chat" viewBox="0 0 24 24"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1 1 21 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01" stroke-width="3.2"/></svg>
+  <svg data-i="chat" viewBox="0 0 24 24"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1 1 21 12z"/></svg>
 </template>
 
 <script>
   const layout = new URLSearchParams(location.search).get('layout') || 'story';
   document.body.classList.add(layout);
+  const icon = (n) => document.getElementById('tpl-icons').content.querySelector(`[data-i="${n}"]`).outerHTML;
 
-  const icon = (n) => document.querySelector(`#tpl-icons`).content.querySelector(`[data-i="${n}"]`).outerHTML;
-  const hero = () => document.getElementById('tpl-hero').innerHTML;
+  const field = (ic, label, value, sub, cls = '') => `
+    <div class="field ${cls}"><div class="ico">${icon(ic)}</div><div>
+      <div class="label">${label}</div><div class="value">${value}</div>${sub ? `<div class="sub">${sub}</div>` : ''}
+    </div></div>`;
 
-  const seatsRow = () => {
-    let s = '<div class="row-label">C</div>';
-    for (let i = 1; i <= 9; i++) {
-      const on = i >= 3 && i <= 7;
-      s += `<div class="seat${on ? ' on' : ''}">C${i}</div>`;
-    }
-    return `<div class="row">${s}<div class="row-label">C</div></div>`;
+  const seats = () => {
+    let s = '';
+    for (let i = 1; i <= 9; i++) s += `<div class="seat${i >= 3 && i <= 7 ? ' on' : ''}">C${i}</div>`;
+    return `<div class="seats">${s}</div>`;
   };
-  const screen = () => `
-    <div class="screen">
-      <svg viewBox="0 0 760 56" preserveAspectRatio="none">
-        <defs><linearGradient id="scr" x1="0" x2="1"><stop offset="0" stop-color="#3dff8f" stop-opacity="0"/><stop offset=".5" stop-color="#3dff8f"/><stop offset="1" stop-color="#3dff8f" stop-opacity="0"/></linearGradient></defs>
-        <path d="M10 34 Q380 0 750 34" stroke="url(#scr)" stroke-width="5" fill="none"/>
-      </svg>
-      <span>PANTALLA</span>
-    </div>`;
 
-  const itemFecha = `
-    <div class="item"><div class="icon">${icon('cal')}</div><div>
-      <div class="label">Fecha</div>
-      <div class="value">16 de <span class="hl">Dic.</span></div>
-      <div class="small">${layout === 'story' ? 'Miércoles 16 de diciembre' : 'Miércoles'}</div>
-    </div></div>`;
-  const itemHora = `
-    <div class="item"><div class="icon">${icon('clock')}</div><div>
-      <div class="label">Hora</div>
-      <div class="value">4:00 <span class="hl">PM</span></div>
-      <div class="small">Función de la tarde</div>
-    </div></div>`;
-  const itemLugar = `
-    <div class="item wide"><div class="icon">${icon('pin')}</div><div>
-      <div class="label">Lugar</div>
-      <div class="value">Cinépolis · <span class="hl">Mall Aventura</span></div>
-      <div class="small">Santa Anita</div>
-    </div></div>`;
+  const barcode = (n) => {
+    let seed = 1612, s = '';
+    const r = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
+    for (let i = 0; i < n; i++) s += `<i style="width:${1 + Math.floor(r() * 4)}px;margin-right:${1 + Math.floor(r() * 3)}px"></i>`;
+    return `<div class="barcode">${s}</div>`;
+  };
+
+  const head = `
+    <div class="eyebrow"><span style="margin-right:-.3em">Se venden entradas</span></div>
+    <div class="title"><span class="t1">Avengers</span><span class="t2">Doomsday</span></div>`;
+  const foot = `<div class="foot">${icon('chat')}<span>¿Te interesan? <b>Escríbeme por interno</b></span></div>`;
+
+  const fFecha = field('cal', 'Fecha', '16 de diciembre', 'Miércoles');
+  const fHora = field('clock', 'Hora', '4:00 p.m.', '');
+  const fCine = field('pin', 'Cine', 'Cinépolis', 'Mall Aventura Santa Anita', 'wide');
 
   const c = document.getElementById('content');
-
   if (layout === 'story') {
-    c.innerHTML = `
-      <div class="ribbon-wrap"><div class="ribbon">¡Se venden entradas!</div></div>
-      <div class="sub-kicker">El día del juicio ha llegado</div>
-      ${hero()}
-      <div class="title">
-        <span class="t-avengers">Avengers</span>
-        <span class="t-doomsday">Doomsday</span>
-      </div>
+    c.innerHTML = `${head}
       <div class="ticket">
-        <div class="info-grid">${itemFecha}${itemHora}${itemLugar}</div>
-        <div class="perf"></div>
-        <div class="seats">
-          <div class="seats-head">
-            <div class="item" style="gap:22px"><div class="icon">${icon('seat')}</div><div>
-              <div class="label">Asientos · Fila C</div>
-              <div class="value">C3 · C4 · C5 · C6 · <span class="hl">C7</span></div>
-            </div></div>
+        <div class="part main"><div class="grid">${fFecha}${fHora}${fCine}</div></div>
+        <div class="part stub">
+          ${field('seat', 'Asientos · Fila C', 'C3 · C4 · C5 · C6 · <span class="green">C7</span>', '')}
+          ${seats()}
+          <div class="stub-bottom">
+            <div class="qty"><div class="label">Cantidad</div><div class="value">5 entradas <span class="green">juntas</span></div></div>
+            ${barcode(46)}
           </div>
-          ${screen()}
-          ${seatsRow()}
-          <div class="seats-note small"><b>5 asientos juntos</b> · ideal para ir en grupo</div>
         </div>
       </div>
-      <div class="cta">${icon('chat')}<span>¡Escríbeme y asegura tu lugar!</span></div>
-    `;
+      ${foot}`;
   } else {
-    c.innerHTML = `
-      <div class="ribbon-wrap"><div class="ribbon">¡Se venden entradas!</div></div>
-      <div class="main">
-        ${hero()}
-        <div class="right">
-          <div class="title">
-            <span class="t-avengers">Avengers</span>
-            <span class="t-doomsday">Doomsday</span>
-          </div>
-          <div class="ticket">
-            <div class="info-grid">${itemFecha}${itemHora}${itemLugar}</div>
+    c.innerHTML = `${head}
+      <div class="ticket">
+        <div class="part main"><div class="grid">${fFecha}${fHora}${fCine}</div></div>
+        <div class="part stub">
+          <div class="label">Asientos · Fila C</div>
+          <div class="value">C3 al <span class="green">C7</span></div>
+          <div class="seats">${[3, 4, 5, 6, 7].map(i => `<div class="seat on">C${i}</div>`).join('')}</div>
+          <div class="stub-bottom">
+            <div class="qty"><div class="label">Cantidad</div><div class="value">5 juntas</div></div>
+            ${barcode(22)}
           </div>
         </div>
       </div>
-      <div class="ticket seats-block">
-        <div class="seats-left item" style="gap:14px"><div class="icon">${icon('seat')}</div><div>
-          <div class="label">Asientos · Fila C</div>
-          <div class="value">C3 a <span class="hl">C7</span></div>
-          <div class="small">5 asientos juntos</div>
-        </div></div>
-        <div>${screen()}${seatsRow()}</div>
-      </div>
-      <div class="cta">${icon('chat')}<span>¡Escríbeme y asegura tu lugar!</span></div>
-    `;
+      ${foot}`;
   }
 
-  /* ---------- rune circle ---------- */
-  (function buildRune() {
-    const svg = document.getElementById('rune');
-    const cx = 350, cy = 350;
-    let h = `<defs>
-      <path id="ringText" d="M350,350 m-282,0 a282,282 0 1,1 564,0 a282,282 0 1,1 -564,0"/>
-      <filter id="rg" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-    </defs><g filter="url(#rg)" fill="none" stroke="#3dff8f">`;
-    h += `<circle cx="${cx}" cy="${cy}" r="330" stroke-width="3" stroke-opacity=".8"/>`;
-    h += `<circle cx="${cx}" cy="${cy}" r="316" stroke-width="1.2" stroke-opacity=".6"/>`;
-    h += `<circle cx="${cx}" cy="${cy}" r="252" stroke-width="2" stroke-opacity=".7"/>`;
-    h += `<circle cx="${cx}" cy="${cy}" r="240" stroke-width="1" stroke-opacity=".5" stroke-dasharray="4 10"/>`;
-    for (let i = 0; i < 120; i++) {
-      const a = i / 120 * Math.PI * 2, long = i % 10 === 0;
-      const r1 = 316, r2 = long ? 298 : 308;
-      h += `<line x1="${cx + Math.cos(a) * r1}" y1="${cy + Math.sin(a) * r1}" x2="${cx + Math.cos(a) * r2}" y2="${cy + Math.sin(a) * r2}" stroke-width="${long ? 2.5 : 1}" stroke-opacity=".7"/>`;
-    }
-    // hexagram-like geometry
-    const poly = (n, r, rot) => {
-      let p = [];
-      for (let i = 0; i < n; i++) { const a = rot + i / n * Math.PI * 2; p.push(`${cx + Math.cos(a) * r},${cy + Math.sin(a) * r}`); }
-      return p.join(' ');
-    };
-    h += `<polygon points="${poly(3, 252, -Math.PI / 2)}" stroke-width="1.5" stroke-opacity=".45"/>`;
-    h += `<polygon points="${poly(3, 252, Math.PI / 2)}" stroke-width="1.5" stroke-opacity=".45"/>`;
-    for (let i = 0; i < 6; i++) {
-      const a = -Math.PI / 2 + i / 6 * Math.PI * 2;
-      h += `<circle cx="${cx + Math.cos(a) * 330}" cy="${cy + Math.sin(a) * 330}" r="11" fill="#03150b" stroke-width="2.5"/>`;
-      h += `<circle cx="${cx + Math.cos(a) * 330}" cy="${cy + Math.sin(a) * 330}" r="4" fill="#3dff8f" stroke="none"/>`;
-    }
-    h += `</g>`;
-    h += `<text font-family="Cinzel" font-weight="700" font-size="22" letter-spacing="7" fill="#3dff8f" fill-opacity=".8">
-      <textPath href="#ringText" startOffset="0">LATVERIA ✦ VICTOR VON DOOM ✦ DOOMSDAY ✦ LATVERIA ✦ VICTOR VON DOOM ✦ DOOMSDAY ✦</textPath></text>`;
-    svg.innerHTML = h;
-  })();
-
-  /* ---------- canvas background ---------- */
-  function mulberry32(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
-
+  // a few quiet dust motes drifting in the projector light
   function paint() {
-    const cv = document.getElementById('bg');
+    const cv = document.getElementById('dust');
     const W = document.body.clientWidth, H = document.body.clientHeight;
-    const dpr = 1;
-    cv.width = W * dpr; cv.height = H * dpr;
+    cv.width = W; cv.height = H;
     const g = cv.getContext('2d');
-    const R = mulberry32(1612);
-    const m = document.getElementById('mask').getBoundingClientRect();
-    const mx = m.left + m.width / 2, my = m.top + m.height * .45;
-
-    // base
-    const base = g.createLinearGradient(0, 0, 0, H);
-    base.addColorStop(0, '#04110a'); base.addColorStop(.5, '#020a06'); base.addColorStop(1, '#010503');
-    g.fillStyle = base; g.fillRect(0, 0, W, H);
-
-    // big aura behind mask
-    let rg = g.createRadialGradient(mx, my, 20, mx, my, Math.max(W, H) * .55);
-    rg.addColorStop(0, 'rgba(40,200,110,.55)'); rg.addColorStop(.25, 'rgba(15,110,60,.35)'); rg.addColorStop(.6, 'rgba(5,40,22,.15)'); rg.addColorStop(1, 'rgba(0,0,0,0)');
-    g.fillStyle = rg; g.fillRect(0, 0, W, H);
-
-    // smoke
-    g.globalCompositeOperation = 'screen';
-    for (let i = 0; i < 160; i++) {
-      const x = R() * W, y = R() * H, r = 80 + R() * 260;
-      const a = .02 + R() * .05;
-      const s = g.createRadialGradient(x, y, 0, x, y, r);
-      const tint = R() < .8 ? `rgba(30,150,85,${a})` : `rgba(160,190,200,${a * .6})`;
-      s.addColorStop(0, tint); s.addColorStop(1, 'rgba(0,0,0,0)');
-      g.fillStyle = s; g.beginPath(); g.arc(x, y, r, 0, Math.PI * 2); g.fill();
+    let seed = 77;
+    const R = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+    for (let i = 0; i < 90; i++) {
+      const y = R() * H * .75;
+      const spread = 80 + y * .55;
+      const x = W / 2 + (R() - .5) * 2 * spread;
+      const r = .6 + R() * 1.8;
+      g.fillStyle = `rgba(220, 245, 230, ${.08 + R() * .22})`;
+      g.beginPath(); g.arc(x, y, r, 0, Math.PI * 2); g.fill();
     }
-
-    // green lightning
-    function bolt(x1, y1, x2, y2, disp, depth, pts) {
-      if (depth === 0) { pts.push([x2, y2]); return pts; }
-      const mxp = (x1 + x2) / 2 + (R() - .5) * disp, myp = (y1 + y2) / 2 + (R() - .5) * disp;
-      bolt(x1, y1, mxp, myp, disp / 2, depth - 1, pts);
-      bolt(mxp, myp, x2, y2, disp / 2, depth - 1, pts);
-      return pts;
-    }
-    g.lineCap = 'round'; g.lineJoin = 'round';
-    const bolts = layout === 'story' ? 7 : 5;
-    for (let i = 0; i < bolts; i++) {
-      const ang = (i / bolts) * Math.PI * 2 + R() * .5;
-      const len = Math.max(W, H) * (.35 + R() * .35);
-      const sx = mx + Math.cos(ang) * m.width * .45, sy = my + Math.sin(ang) * m.height * .45;
-      const ex = mx + Math.cos(ang) * len, ey = my + Math.sin(ang) * len;
-      const pts = bolt(sx, sy, ex, ey, len * .25, 7, [[sx, sy]]);
-      [[14, 'rgba(61,255,143,.10)'], [6, 'rgba(61,255,143,.22)'], [2, 'rgba(200,255,225,.55)']].forEach(([w, col]) => {
-        g.save(); g.strokeStyle = col; g.lineWidth = w; g.shadowColor = '#3dff8f'; g.shadowBlur = 20;
-        g.beginPath(); pts.forEach(([x, y], k) => k ? g.lineTo(x, y) : g.moveTo(x, y));
-        g.stroke(); g.restore();
-      });
-    }
-
-    // embers
-    for (let i = 0; i < 320; i++) {
-      const x = R() * W;
-      const y = H * Math.pow(R(), .6);
-      const r = R() < .9 ? .8 + R() * 2.2 : 2.5 + R() * 3;
-      const a = .35 + R() * .6;
-      g.save();
-      g.shadowColor = '#3dff8f'; g.shadowBlur = 12;
-      g.fillStyle = R() < .75 ? `rgba(110,255,170,${a})` : `rgba(230,255,240,${a})`;
-      if (R() < .3) { // streak
-        g.strokeStyle = g.fillStyle; g.lineWidth = r * .8;
-        g.beginPath(); g.moveTo(x, y); g.lineTo(x + (R() - .5) * 20, y - 14 - R() * 30); g.stroke();
-      } else { g.beginPath(); g.arc(x, y, r, 0, Math.PI * 2); g.fill(); }
-      g.restore();
-    }
-    g.globalCompositeOperation = 'source-over';
-
-    // vignette
-    const v = g.createRadialGradient(W / 2, H / 2, Math.min(W, H) * .35, W / 2, H / 2, Math.max(W, H) * .75);
-    v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, 'rgba(0,0,0,.75)');
-    g.fillStyle = v; g.fillRect(0, 0, W, H);
-
-    // film grain
-    const img = g.getImageData(0, 0, W, H), d = img.data;
-    for (let i = 0; i < d.length; i += 4) {
-      const n = (R() - .5) * 18;
-      d[i] += n; d[i + 1] += n; d[i + 2] += n;
-    }
-    g.putImageData(img, 0, 0);
     document.body.dataset.ready = '1';
   }
-
   document.fonts.ready.then(() => requestAnimationFrame(paint));
 </script>
 </body>
