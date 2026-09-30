@@ -1,4 +1,4 @@
-// Renderiza banner.html a PNG en los dos formatos para WhatsApp.
+// Renderiza banner.html a PNG: Estado y chat de WhatsApp, y Facebook Marketplace.
 // Uso: node render.js   (requiere playwright)
 const path = require('path');
 const { chromium } = require('playwright');
@@ -6,6 +6,7 @@ const { chromium } = require('playwright');
 const sizes = [
   { layout: 'story', width: 1080, height: 1920, out: 'avengers-doomsday-estado-1080x1920.png' },
   { layout: 'square', width: 1080, height: 1080, out: 'avengers-doomsday-chat-1080x1080.png' },
+  { layout: 'market', width: 1200, height: 1200, out: 'avengers-doomsday-marketplace-1200x1200.png' },
 ];
 
 (async () => {

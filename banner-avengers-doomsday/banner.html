@@ -189,6 +189,49 @@
   .square .barcode { height: 58px; }
   .square .foot { margin-top: 46px; font-size: 28px; gap: 14px; }
   .square .foot svg { width: 36px; height: 36px; }
+  /* =================== MARKETPLACE 1200x1200 =================== */
+  body.market { --w: 1200px; --h: 1200px; }
+  .market .beam { width: 1300px; height: 900px; }
+  .market .content { padding: 0 60px; }
+  .market .eyebrow { font-size: 36px; letter-spacing: .3em; gap: 24px; }
+  .market .eyebrow::before, .market .eyebrow::after { width: 80px; }
+  .market .title { margin-top: 28px; }
+  .market .t1 { font-size: 178px; letter-spacing: .05em; }
+  .market .t2 { font-size: 76px; letter-spacing: .38em; margin-top: 8px; padding-left: .38em; }
+
+  .market .ticket { flex-direction: row; width: 1080px; margin-top: 56px; }
+  .market .main {
+    flex: 1; padding: 46px 44px 44px; border-radius: 28px 0 0 28px;
+    -webkit-mask:
+      radial-gradient(circle 26px at 100% 0, #0000 97%, #000) 0 0 / 100% 51% no-repeat,
+      radial-gradient(circle 26px at 100% 100%, #0000 97%, #000) 0 100% / 100% 51% no-repeat;
+  }
+  .market .main::after {
+    content: ""; position: absolute; top: 40px; bottom: 40px; right: 0; width: 2px;
+    background-image: linear-gradient(180deg, rgba(17, 26, 21, .28) 55%, transparent 0);
+    background-size: 2px 18px;
+  }
+  .market .stub {
+    width: 400px; padding: 46px 40px 40px; border-radius: 0 28px 28px 0;
+    display: flex; flex-direction: column;
+    -webkit-mask:
+      radial-gradient(circle 26px at 0 0, #0000 97%, #000) 0 0 / 100% 51% no-repeat,
+      radial-gradient(circle 26px at 0 100%, #0000 97%, #000) 0 100% / 100% 51% no-repeat;
+  }
+  .market .grid { display: grid; grid-template-columns: 1fr; gap: 28px; }
+  .market .field { gap: 20px; }
+  .market .ico { width: 66px; height: 66px; }
+  .market .ico svg { width: 34px; height: 34px; }
+  .market .label { font-size: 17px; margin-bottom: 6px; }
+  .market .value { font-size: 44px; }
+  .market .sub { font-size: 23px; margin-top: 4px; }
+  .market .stub .qty .value { font-size: 58px; }
+  .market .stub .seats-label { margin-top: 30px; }
+  .market .seats { gap: 8px; margin-top: 14px; }
+  .market .seat { width: 57px; height: 52px; font-size: 18px; border-radius: 9px 9px 5px 5px; }
+  .market .stub .barcode { margin-top: auto; height: 62px; }
+  .market .foot { margin-top: 54px; font-size: 32px; gap: 16px; }
+  .market .foot svg { width: 40px; height: 40px; }
 </style>
 </head>
 <body>
@@ -231,7 +274,8 @@
   const head = `
     <div class="eyebrow"><span style="margin-right:-.3em">Se venden entradas</span></div>
     <div class="title"><span class="t1">Avengers</span><span class="t2">Doomsday</span></div>`;
-  const foot = `<div class="foot">${icon('chat')}<span>¿Te interesan? <b>Escríbeme por interno</b></span></div>`;
+  const cta = layout === 'market' ? 'Envíame un mensaje' : 'Escríbeme por interno';
+  const foot = `<div class="foot">${icon('chat')}<span>¿Te interesan? <b>${cta}</b></span></div>`;
 
   const fFecha = field('cal', 'Fecha', '16 de diciembre', 'Miércoles');
   const fHora = field('clock', 'Hora', '4:00 p.m.', '');
@@ -249,6 +293,18 @@
             <div class="qty"><div class="label">Cantidad</div><div class="value">5 entradas <span class="green">juntas</span></div></div>
             ${barcode(46)}
           </div>
+        </div>
+      </div>
+      ${foot}`;
+  } else if (layout === 'market') {
+    c.innerHTML = `${head}
+      <div class="ticket">
+        <div class="part main"><div class="grid">${fFecha}${fHora}${fCine}</div></div>
+        <div class="part stub">
+          <div class="qty"><div class="label">Cantidad</div><div class="value">5 <span class="green">entradas</span></div></div>
+          <div class="label seats-label">Asientos · Fila C</div>
+          <div class="seats">${[3, 4, 5, 6, 7].map(i => `<div class="seat on">C${i}</div>`).join('')}</div>
+          ${barcode(52)}
         </div>
       </div>
       ${foot}`;
